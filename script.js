@@ -1,5 +1,6 @@
 // Retrieve DOM elements
 // TODO: Get references to the required DOM elements using document.getElementById()
+//Creating the js elements that will correspond with the html elements
 //user inputs
 const form = document.getElementById("poster-form");
 //image of poster
@@ -50,25 +51,20 @@ const posters = [
   
   // Function to generate a random poster
   
+  //Creating the section object
   const selec= document.createElement("section");
     selec.className="poster";
 
   function generateRandomPoster() {
+    //Just to make sure that the function is being invoked
     console.log("IM working");
    
-
-   
-
+        //Giving the html elements their values
         img.setAttribute("src", posters[ Math.floor(Math.random() * posters.length)].image);
         img.setAttribute("Alt", "Motivation Poster");
         title.textContent=posters[ Math.floor(Math.random() * posters.length)].title;
         quote.textContent=posters[ Math.floor(Math.random() * posters.length)].quote;
-        //title.setAttribute("h2",  posters[randnum].quote);
-       // quote.setAttribute("h3", posters[randnum].quote);
-
-       // console.log(img);
-       // console.log(title);
-       // console.log(quote);
+      //Adding the elements to the section 
        console.log(selec);
         selec.appendChild(img);
         selec.appendChild(quote);
@@ -79,13 +75,7 @@ const posters = [
 
             //appends the poster to the webpage 
             document.getElementsByClassName("poster")[0].appendChild(selec);
-            //console.log(document.querySelector('poster'))//.appendChild(selec);
-          // document.querySelector('section#poster').appendChild(img);
-           //document.querySelector('section#poster').appendChild(title);
-           //document.querySelector('section#poster').appendChild(quote);
-          // selec.removeChild(img);
-          // selec.removeChild(quote);
-           //selec.removeChild(title);
+  
            console.log("IM working");
         
     // TODO: Generate a random index within the range of the posters array length
@@ -93,6 +83,7 @@ const posters = [
     // TODO: Retrieve the random poster object from the posters array
   
     // TODO: Call the function to update the DOM with the values from the random poster object
+    //Would call UpdatePoster() here but changed the way it functions.(Was a bit of an experiment)
   }
   buttonrand.addEventListener("click", generateRandomPoster);
 
@@ -102,6 +93,7 @@ const posters = [
   function generateCustomPoster(event) {
     event.preventDefault();
 
+    //Getting the values from the users inputs for the html <input> method and changing it.
     title.textContent=inputtitle.value;
     quote.textContent=inputquote.value;
   
@@ -112,15 +104,28 @@ const posters = [
   
     // TODO: Call the function to update the DOM with the values from the custom poster object
   }
+  //Makes the button invoke the function when clicked
   buttonsub.addEventListener("click",generateCustomPoster)
   
   // Function to update the poster content in the DOM
+  //For this function i added another input box for the user to input the url of the 
+  //image that they wanted to use along with their title and quote which allowed them to
+  //create their own poster. I did  not make use of the parameters but if i was to use this function
+  //to update the poster instead of doing it in the generateRadomPoster() function i would just
+  //call the function in the generateRandomPoster() and  pass in the respective objects as
+  //parameters and put lines 62-81 in the function.
   function updatePoster(imageUrl, atitle, aquote) {
 
+    //Getting the values from the users inputs for the html <input> method and changing it.
     title.textContent=inputtitle.value;
     quote.textContent=inputquote.value;
     img.setAttribute("src", inputimage.value);
     // TODO: Update the DOM with the values provided for the poster image, title, and quote
   }
 
+//Invoking the function when the button is clicked
   buttonsub.addEventListener("click",updatePoster)
+
+  //Due to my added code, if the user does not add in an image the poster will  not have one.
+  //to correct this i could add a seperate button so that buttonsub is not invoking updatePoster().
+  
